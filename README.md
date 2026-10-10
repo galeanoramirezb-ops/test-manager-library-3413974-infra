@@ -49,3 +49,23 @@ antes de las 3:00 p. m.**: no se presenta nada que no esté en GitHub.
 | [`test-manager-library-3413974-page`](https://github.com/code-sena/test-manager-library-3413974-page) | Sitio público estático de presentación |
 | [`test-manager-library-3413974-infra`](https://github.com/code-sena/test-manager-library-3413974-infra) | Contenedores, red, volúmenes y motor de base de datos vacío |
 | [`test-manager-library-3413974-tool`](https://github.com/code-sena/test-manager-library-3413974-tool) | Utilidades: sembrador de datos de demostración |
+
+## Despliegue con Docker
+
+### Levantar el entorno (un solo comando - RNF-5 / T-20)
+```bash
+docker compose up -d --build
+```
+
+### Servicios levantados
+- **db**: PostgreSQL 16 expuesto en el puerto `5432` (Base de datos: `library`, Usuario: `library`, Contraseña: `library`).
+- **api**: Backend Laravel PHP 8.4 expuesto en `http://localhost:8000`.
+- **app**: Frontend SPA en React expuesto en `http://localhost:3000`.
+- **page**: Sitio web estático de presentación expuesto en `http://localhost:8080`.
+
+### Verificación de salud (T-01)
+```bash
+curl http://localhost:8000/health
+# Respuesta esperada: {"status":"ok"}
+```
+
